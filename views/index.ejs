@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head> 
+    <title>首页</title>
+    <link rel='stylesheet' href='/style/style.css' />
+    <link rel='stylesheet' href='/style/mui.min.css' />
+</head>
+<body>
+    <% include header %>
+
+    <div  class="posts">
+        <div class="post-title">
+            <h2>文章列表</h2>
+            <a href="/post/edit">
+                <button class="mui-btn">发表文章</button>
+            </a>
+        </div>
+        <ul>
+        <% posts.forEach(post => { %>
+            <li class="post-item">
+                <h4><a href="/post/detail/<%= post.id %>"><%= post.title %></a></h4>
+                <div><%= post.content %></div>
+                <div class="post-info">
+                    发表于 <%= post.name %>
+
+                    <% if( locals.user && post.uid == locals.user.id){ %>
+                    <a href="/post/edit/<%= post.id %>">编辑</a>
+                    <a href="/post/delete/<%= post.id %>">删除</a>
+                    <% } %>   
+                </div>
+            </li>
+        <% }) %>
+        </ul>
+        <div class="page-ctrl">
+            <span>当前页数 <%= page %>/<%= Math.ceil(count/5) %></span>
+            <div>
+                <% if(page != 1){ %>
+                    <button class="mui-btn mui-btn--primary prev">上一页</button>
+                <% } %>
+                <% if(page != Math.ceil(count/5)){ %>
+                    <button class="mui-btn mui-btn--primary next" >下一页</button>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        (function(){
+
+            var page = <%=page%>;
+
+            var prev = document.querySelector(".prev");
+            var next = document.querySelector(".next");
+
+            prev && prev.addEventListener("click", function(){
+                page--;
+                window.location.href = "/?page=" + page;
+            });
+
+            next && next.addEventListener("click", function(){
+                page++;
+                window.location.href = "/?page=" + page;
+            });
+        })();
+    </script>
+</body>
+</html>

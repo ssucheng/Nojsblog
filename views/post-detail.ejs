@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>文章详情</title>
+    <link rel='stylesheet' href='/style/style.css' />
+    <link rel='stylesheet' href='/style/mui.min.css' />
+  </head>
+  <body>
+    
+    <% include header %>
+
+    <div class="post-detail">
+      <h4><%= post.title %></h4>
+      <p><%= post.name %> 发表于 <%= post.moment %></p>
+      <p><%= post.content %></p>
+    </div>
+  </body>
+</html>

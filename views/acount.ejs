@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h4>编辑个人资料</h4>
+    <form action="/acount" method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" value="<%= user.name %>"/><br>
+        <img src="/upload/<%= user.avator %>" alt="" id="img"><br>
+        <input type="file" id="avator" name="avator" multiple="multiple"><br>
+        <button type="submit">确认修改</button>
+    </form>
+
+    <script>
+        var avator = document.querySelector("#avator");
+        var img = document.querySelector("#img");
+
+        avator.addEventListener("change", function(e){
+            reader = new FileReader();
+            reader.onload = function (e) {
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        })
+    </script>
+</body>
+</html>
